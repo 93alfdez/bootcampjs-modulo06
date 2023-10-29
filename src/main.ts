@@ -3,7 +3,9 @@ import "./style.css";
 
 // Mostrar Puntuacion
 let puntuacionUsuario: number = 0;
+let carta: number;
 const elementoPuntuacion = document.getElementById('puntuacion');
+const elementoMensaje = document.getElementById('mensaje');
 
 const muestraPuntuacion = (carta: number) => {
 
@@ -13,13 +15,14 @@ const muestraPuntuacion = (carta: number) => {
 
     puntuacionUsuario = puntuacionUsuario + carta;
 
-    if (elementoPuntuacion) {
+    if (elementoPuntuacion && elementoMensaje) {
         elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacionUsuario}`;
         // Game Over
         const gameOver = (puntuacionUsuario: number) => {
-            if (puntuacionUsuario > 7.5 && botonDarCarta instanceof HTMLButtonElement) {
-                elementoPuntuacion.innerHTML = 'Game over';
+            if (puntuacionUsuario > 7.5 && botonDarCarta instanceof HTMLButtonElement && botonPlantarse instanceof HTMLButtonElement) {
+                elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacionUsuario}<br/>Game over`;
                 botonDarCarta.disabled = true;
+                botonPlantarse.disabled = true;
             }
         }
         gameOver(puntuacionUsuario);
@@ -29,44 +32,63 @@ const muestraPuntuacion = (carta: number) => {
 
 
 // Pedir carta
+
+let cartasMostradas: number[] = [];
+
 const dameCarta = () => {
 
-    let carta = Math.floor(Math.random() * 10 + 1);
+    carta = Math.floor(Math.random() * 10 + 1);
+
     if (carta > 7) {
         carta = carta + 2;
     }
+
+    if (cartasMostradas.includes(carta)) {
+        dameCarta();
+        return;
+    }
+
+    cartasMostradas.push(carta);
+
     muestraCarta(carta);
     muestraPuntuacion(carta);
 };
 
 // Reset
 const reset = () => {
-    if (botonDarCarta instanceof HTMLButtonElement) {
+    if (botonDarCarta instanceof HTMLButtonElement && botonPlantarse instanceof HTMLButtonElement) {
         botonDarCarta.disabled = false;
-        if (elementoPuntuacion) {
+        botonPlantarse.disabled = false;
+        if (elementoPuntuacion && elementoMensaje) {
             puntuacionUsuario = 0;
             elementoPuntuacion.innerHTML = '';
-            const cartaBack = '/src/images/back.jpg';
-            elementoImagenCarta.src = cartaBack;
+            elementoMensaje.innerHTML = '';
+            elementoImagenCarta.src = '/src/images/back.png';
+            cartasMostradas = [];
         }
     }
 }
 
 // Plantarse
 const plantarse = () => {
-    if (elementoPuntuacion) {
+    if (elementoMensaje && elementoPuntuacion) {
         if (puntuacionUsuario >= 0.5 && puntuacionUsuario <= 4) {
-            let mensaje = 'Has sido muy conservador';
-            elementoPuntuacion.innerHTML = mensaje;
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacionUsuario}`;
+            elementoMensaje.innerHTML = `Has sido muy conservador`;
         }
-        if (puntuacionUsuario === 5) {
-            elementoPuntuacion.innerHTML = 'Te ha entrado el canguelo eh?';
+        else if (puntuacionUsuario === 5) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacionUsuario}`;
+            elementoMensaje.innerHTML = `Te ha entrado el canguelo eh?`;
         }
-        if (puntuacionUsuario === 6 || puntuacionUsuario === 7) {
-            elementoPuntuacion.innerHTML = 'Casi casi...';
+        else if (puntuacionUsuario >= 6 || puntuacionUsuario === 7) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacionUsuario}`;
+            elementoMensaje.innerHTML = `Casi casi...`;
         }
-        if (puntuacionUsuario === 7.5) {
-            elementoPuntuacion.innerHTML = '¡Lo has clavado! ¡Enhorabuena!';
+        else if (puntuacionUsuario === 7.5 && botonDarCarta instanceof HTMLButtonElement && botonPlantarse instanceof HTMLButtonElement) {
+            elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacionUsuario}<br/>`;
+            elementoMensaje.innerHTML = `¡Lo has clavado! ¡Enhorabuena!`;
+            botonDarCarta.disabled = true;
+            botonPlantarse.disabled = true;
         }
     }
 }
@@ -78,43 +100,43 @@ const muestraCarta = (carta: number): void => {
 
     switch (carta) {
         case carta = 1:
-            const asCopas = '/src/images/1_as-copas.jpg';
+            const asCopas = '/src/images/1_as-copas.png';
             elementoImagenCarta.src = asCopas;
             break;
         case carta = 2:
-            const dosCopas = '/src/images/2_dos-copas.jpg';
+            const dosCopas = '/src/images/2_dos-copas.png';
             elementoImagenCarta.src = dosCopas;
             break;
         case carta = 3:
-            const tresCopas = '/src/images/3_tres-copas.jpg';
+            const tresCopas = '/src/images/3_tres-copas.png';
             elementoImagenCarta.src = tresCopas;
             break;
         case carta = 4:
-            const cuatroCopas = '/src/images/4_cuatro-copas.jpg';
+            const cuatroCopas = '/src/images/4_cuatro-copas.png';
             elementoImagenCarta.src = cuatroCopas;
             break;
         case carta = 5:
-            const cincoCopas = '/src/images/5_cinco-copas.jpg';
+            const cincoCopas = '/src/images/5_cinco-copas.png';
             elementoImagenCarta.src = cincoCopas;
             break;
         case carta = 6:
-            const seisCopas = '/src/images/6_seis-copas.jpg';
+            const seisCopas = '/src/images/6_seis-copas.png';
             elementoImagenCarta.src = seisCopas;
             break;
         case carta = 7:
-            const sieteCopas = '/src/images/7_siete-copas.jpg';
+            const sieteCopas = '/src/images/7_siete-copas.png';
             elementoImagenCarta.src = sieteCopas;
             break;
         case carta = 10:
-            const sotaCopas = '/src/images/10_sota-copas.jpg';
+            const sotaCopas = '/src/images/10_sota-copas.png';
             elementoImagenCarta.src = sotaCopas;
             break;
         case carta = 11:
-            const caballoCopas = '/src/images/11_caballo-copas.jpg';
+            const caballoCopas = '/src/images/11_caballo-copas.png';
             elementoImagenCarta.src = caballoCopas;
             break;
         case carta = 12:
-            const reyCopas = '/src/images/12_rey-copas.jpg';
+            const reyCopas = '/src/images/12_rey-copas.png';
             elementoImagenCarta.src = reyCopas;
             break;
 
