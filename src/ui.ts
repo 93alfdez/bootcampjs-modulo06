@@ -1,16 +1,54 @@
 import { partida } from "./model";
-import { actualizaPuntuacion, dameCarta, reset, } from "./motor";
+import { actualizaPuntuacion, dameCarta } from "./motor";
 
-const elementoPuntuacion = document.getElementById('puntuacion');
-const elementoMensaje = document.getElementById('mensaje');
-let elementoImagenCarta = document.getElementById('imagen') as HTMLImageElement;
+export const elementoPuntuacion = document.getElementById('puntuacion');
+export const elementoMensaje = document.getElementById('mensaje');
+export const elementoImagenCarta = document.getElementById('imagen') as HTMLImageElement;
+
+// Botón 'Pide Carta'
+export const botonDarCarta = document.getElementById('pideCarta');
+
+botonDarCarta?.addEventListener('click', () => {
+    dameCarta();
+    actualizaPuntuacion();
+    muestraCarta();
+    muestraPuntuacion();
+});
+
+// Botón 'Volver a jugar'
+const botonReset = document.getElementById('reset');
+botonReset?.addEventListener('click', () => {
+    iniciarPartida();
+    resetUI();
+});
+
+// Botón 'Que pasaría'
+const botonQuePasaria = document.getElementById('quePasaria');
+botonQuePasaria?.addEventListener('click', () => {
+    actualizaPuntuacion();
+    dameCarta();
+    muestraCarta();
+    if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
+        elementoPuntuacion.innerHTML = `Tu puntuación hubiese sido de ${partida.puntuacionUsuario}`;
+    };
+    if (elementoMensaje && elementoMensaje instanceof HTMLElement) {
+        elementoMensaje.innerHTML = '';
+    };
+    if (botonQuePasaria && botonQuePasaria instanceof HTMLButtonElement) {
+        botonQuePasaria.disabled = true;
+    };
+});
 
 
+// Botón 'Plantarse'
+const botonPlantarse = document.getElementById('mePlanto');
+botonPlantarse?.addEventListener('click', () => {
+    plantarse();
+    quePasaria();
+});
 
 // Mostrar Puntuacion
 export const muestraPuntuacion = () => {
-    actualizaPuntuacion();
-
     if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
         elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
     };
@@ -61,50 +99,51 @@ export const gameOver = (puntuacionUsuario: number) => {
 
 
 // Mostrar Carta
-export const muestraCarta = (carta): void => {
-    carta = partida.carta.valor;
-    switch (partida.carta.valor) {
-        case carta = 1:
-            partida.carta.url = '/src/images/1_as-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 2:
-            partida.carta.url = '/src/images/2_dos-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 3:
-            partida.carta.url = '/src/images/3_tres-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 4:
-            partida.carta.url = '/src/images/4_cuatro-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 5:
-            partida.carta.url = '/src/images/5_cinco-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 6:
-            partida.carta.url = '/src/images/6_seis-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 7:
-            partida.carta.url = '/src/images/7_siete-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 10:
-            partida.carta.url = '/src/images/10_sota-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 11:
-            partida.carta.url = '/src/images/11_caballo-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-        case partida.carta.valor = 12:
-            partida.carta.url = '/src/images/12_rey-copas.png';
-            elementoImagenCarta.src = partida.carta.url;
-            break;
-    };
+export const muestraCarta = () => {
+    if (elementoImagenCarta && elementoImagenCarta instanceof HTMLImageElement) {
+        switch (partida.carta.valor) {
+            case partida.carta.valor = 1:
+                partida.carta.url = '/src/images/1_as-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 2:
+                partida.carta.url = '/src/images/2_dos-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 3:
+                partida.carta.url = '/src/images/3_tres-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 4:
+                partida.carta.url = '/src/images/4_cuatro-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 5:
+                partida.carta.url = '/src/images/5_cinco-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 6:
+                partida.carta.url = '/src/images/6_seis-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 7:
+                partida.carta.url = '/src/images/7_siete-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 10:
+                partida.carta.url = '/src/images/10_sota-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 11:
+                partida.carta.url = '/src/images/11_caballo-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+            case partida.carta.valor = 12:
+                partida.carta.url = '/src/images/12_rey-copas.png';
+                elementoImagenCarta.src = partida.carta.url;
+                break;
+        };
+    }
 };
 
 
@@ -140,6 +179,14 @@ export const plantarse = () => {
     };
 };
 
+//Reset
+export const iniciarPartida = () => {
+    partida.puntuacionUsuario = 0;
+    partida.carta.url = '/src/images/back.png';
+    partida.cartasMostradas = [];
+}
+
+
 // Nueva Partida
 const resetUI = () => {
 
@@ -148,7 +195,7 @@ const resetUI = () => {
     };
 
     if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
-        botonPlantarse.disabled = true;
+        botonPlantarse.disabled = false;
     };
 
     if (botonQuePasaria && botonQuePasaria instanceof HTMLButtonElement) {
@@ -164,8 +211,6 @@ const resetUI = () => {
         elementoMensaje instanceof HTMLElement) {
         elementoMensaje.innerHTML = '';
     };
-
-    reset();
 };
 
 // Que pasaría
@@ -185,39 +230,3 @@ const quePasaria = () => {
     }
 };
 
-// Botón 'Pide Carta'
-const botonDarCarta = document.getElementById('pideCarta');
-botonDarCarta?.addEventListener('click', () => {
-    dameCarta();
-    muestraCarta();
-    muestraPuntuacion();
-});
-
-// Botón 'Volver a jugar'
-const botonReset = document.getElementById('reset');
-botonReset?.addEventListener('click', resetUI);
-
-// Botón 'Que pasaría'
-const botonQuePasaria = document.getElementById('quePasaria');
-botonQuePasaria?.addEventListener('click', () => {
-    dameCarta();
-    muestraPuntuacion();
-    muestraCarta();
-    if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
-        elementoPuntuacion.innerHTML = `Tu puntuación hubiese sido de ${partida.puntuacionUsuario}`;
-    };
-    if (elementoMensaje && elementoMensaje instanceof HTMLElement) {
-        elementoMensaje.innerHTML = '';
-    };
-    if (botonQuePasaria && botonQuePasaria instanceof HTMLButtonElement) {
-        botonQuePasaria.disabled = true;
-    };
-});
-
-
-// Botón 'Plantarse'
-const botonPlantarse = document.getElementById('mePlanto');
-botonPlantarse?.addEventListener('click', () => {
-    plantarse();
-    quePasaria();
-});

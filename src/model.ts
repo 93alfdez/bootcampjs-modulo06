@@ -4,7 +4,7 @@ export interface Partida {
     cartasMostradas: Carta[],
 }
 
-interface Carta {
+export interface Carta {
     valor: number,
     url: string,
 }
