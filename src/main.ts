@@ -1,3 +1,3 @@
-import { iniciarPartida } from "./ui";
+import { reset } from "./motor";
 
-document.addEventListener('DOMContentLoaded', iniciarPartida);
+document.addEventListener('DOMContentLoaded', reset);
