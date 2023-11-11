@@ -1,5 +1,5 @@
 import { partida } from "./model";
-import { actualizaPuntuacion, dameCarta } from "./motor";
+import { actualizaPuntuacion, cartasMostradas, dameCarta } from "./motor";
 
 export const elementoPuntuacion = document.getElementById('puntuacion');
 export const elementoMensaje = document.getElementById('mensaje');
@@ -9,6 +9,7 @@ export const elementoImagenCarta = document.getElementById('imagen') as HTMLImag
 export const botonDarCarta = document.getElementById('pideCarta');
 
 botonDarCarta?.addEventListener('click', () => {
+    cartasMostradas();
     dameCarta();
     actualizaPuntuacion();
     muestraCarta();
@@ -25,8 +26,8 @@ botonReset?.addEventListener('click', () => {
 // Botón 'Que pasaría'
 const botonQuePasaria = document.getElementById('quePasaria');
 botonQuePasaria?.addEventListener('click', () => {
-    actualizaPuntuacion();
     dameCarta();
+    actualizaPuntuacion();
     muestraCarta();
     if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
         elementoPuntuacion.innerHTML = `Tu puntuación hubiese sido de ${partida.puntuacionUsuario}`;
@@ -100,47 +101,40 @@ export const gameOver = (puntuacionUsuario: number) => {
 
 // Mostrar Carta
 export const muestraCarta = () => {
+
+    elementoImagenCarta.src = partida.carta.url
+
     if (elementoImagenCarta && elementoImagenCarta instanceof HTMLImageElement) {
         switch (partida.carta.valor) {
             case partida.carta.valor = 1:
-                partida.carta.url = '/src/images/1_as-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/1_as-copas.png';
                 break;
             case partida.carta.valor = 2:
-                partida.carta.url = '/src/images/2_dos-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/2_dos-copas.png';
                 break;
             case partida.carta.valor = 3:
-                partida.carta.url = '/src/images/3_tres-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/3_tres-copas.png';
                 break;
             case partida.carta.valor = 4:
-                partida.carta.url = '/src/images/4_cuatro-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/4_cuatro-copas.png';
                 break;
             case partida.carta.valor = 5:
-                partida.carta.url = '/src/images/5_cinco-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/5_cinco-copas.png';
                 break;
             case partida.carta.valor = 6:
-                partida.carta.url = '/src/images/6_seis-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/6_seis-copas.png';
                 break;
             case partida.carta.valor = 7:
-                partida.carta.url = '/src/images/7_siete-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/7_siete-copas.png';
                 break;
             case partida.carta.valor = 10:
-                partida.carta.url = '/src/images/10_sota-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/10_sota-copas.png';
                 break;
             case partida.carta.valor = 11:
-                partida.carta.url = '/src/images/11_caballo-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/11_caballo-copas.png';
                 break;
             case partida.carta.valor = 12:
-                partida.carta.url = '/src/images/12_rey-copas.png';
-                elementoImagenCarta.src = partida.carta.url;
+                elementoImagenCarta.src = '/src/images/12_rey-copas.png';
                 break;
         };
     }
@@ -182,7 +176,7 @@ export const plantarse = () => {
 //Reset
 export const iniciarPartida = () => {
     partida.puntuacionUsuario = 0;
-    partida.carta.url = '/src/images/back.png';
+    elementoImagenCarta.src = '/src/images/back.png';
     partida.cartasMostradas = [];
 }
 

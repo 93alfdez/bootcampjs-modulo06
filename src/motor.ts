@@ -1,5 +1,6 @@
 import { partida } from "./model";
 
+
 // Pedir carta
 export const dameCarta = () => {
 
@@ -9,22 +10,28 @@ export const dameCarta = () => {
         partida.carta.valor = partida.carta.valor + 2;
     };
 
+};
+
+export const cartasMostradas = () => {
+
+    partida.cartasMostradas.push(partida.carta);
+
     // Cartas Mostradas
     if (partida.cartasMostradas.includes(partida.carta)) {
         dameCarta();
         return;
     };
 
-    partida.cartasMostradas.push(partida.carta);
-
-};
+}
 
 
 // Actualiza la puntuación
 export const actualizaPuntuacion = () => {
+    let valorCarta: number = partida.carta.valor;
+
     if (partida.carta.valor >= 10) {
-        partida.carta.valor = 0.5;
+        valorCarta = 0.5;
     };
 
-    partida.puntuacionUsuario = partida.puntuacionUsuario + partida.carta.valor;
+    partida.puntuacionUsuario = partida.puntuacionUsuario + valorCarta;
 }
