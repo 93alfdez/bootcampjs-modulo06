@@ -15,10 +15,9 @@ He separado el proyecto en cuatro archivos distintos:
 En **ui** he creado iniciarPartida:
 
     export const iniciarPartida = () => {
-        partida.carta = 0;
-        partida.cartasMostradas = [];
         partida.puntuacionUsuario = 0;
-        dameCarta();
+        elementoImagenCarta.src = '/src/images/back.png';
+        partida.cartasMostradas = [];
     }
 
 Lo he importado en **main** y lo he llamado con document.addEventListener para poder iniciar una Partida:
