@@ -1,5 +1,5 @@
 import { partida } from "./model";
-import { actualizaPuntuacion, cartasMostradas, dameCarta } from "./motor";
+import { actualizaPuntuacion, dameCarta } from "./motor";
 
 export const elementoPuntuacion = document.getElementById('puntuacion');
 export const elementoMensaje = document.getElementById('mensaje');
@@ -10,7 +10,6 @@ export const botonDarCarta = document.getElementById('pideCarta');
 
 botonDarCarta?.addEventListener('click', () => {
     dameCarta();
-    cartasMostradas();
     actualizaPuntuacion();
     muestraCarta();
     muestraPuntuacion();

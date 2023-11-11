@@ -1,7 +1,7 @@
 export interface Partida {
     puntuacionUsuario: number,
     carta: Carta,
-    cartasMostradas: Carta[],
+    cartasMostradas: number[],
 }
 
 export interface Carta {

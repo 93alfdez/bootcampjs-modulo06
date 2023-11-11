@@ -10,18 +10,15 @@ export const dameCarta = () => {
         partida.carta.valor = partida.carta.valor + 2;
     };
 
-};
-
-export const cartasMostradas = () => {
-    partida.cartasMostradas.push(partida.carta);
     // Cartas Mostradas
-    if (partida.cartasMostradas.includes(partida.carta)) {
+    if (partida.cartasMostradas.includes(partida.carta.valor)) {
         dameCarta();
-        return;
+        return
     };
 
-}
+    partida.cartasMostradas.push(partida.carta.valor);
 
+};
 
 // Actualiza la puntuación
 export const actualizaPuntuacion = () => {
