@@ -13,15 +13,13 @@ export const dameCarta = () => {
 };
 
 export const cartasMostradas = () => {
-
-    partida.cartasMostradas.push(partida.carta);
-
     // Cartas Mostradas
     if (partida.cartasMostradas.includes(partida.carta)) {
         dameCarta();
         return;
     };
 
+    partida.cartasMostradas.push(partida.carta);
 }
 
 
