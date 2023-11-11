@@ -9,8 +9,8 @@ export const elementoImagenCarta = document.getElementById('imagen') as HTMLImag
 export const botonDarCarta = document.getElementById('pideCarta');
 
 botonDarCarta?.addEventListener('click', () => {
-    cartasMostradas();
     dameCarta();
+    cartasMostradas();
     actualizaPuntuacion();
     muestraCarta();
     muestraPuntuacion();
@@ -194,6 +194,7 @@ const resetUI = () => {
 
     if (botonQuePasaria && botonQuePasaria instanceof HTMLButtonElement) {
         botonQuePasaria.classList.remove('mostrar');
+        botonQuePasaria.disabled = false;
     };
 
     if (elementoPuntuacion &&
