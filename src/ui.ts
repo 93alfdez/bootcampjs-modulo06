@@ -1,5 +1,5 @@
 import { partida } from "./model";
-import { actualizaPuntuacion, dameCarta } from "./motor";
+import { actualizaPuntuacion, dameCarta, iniciarPartida, muestraPuntuacion, compruebaPuntuacion } from "./motor";
 
 export const elementoPuntuacion = document.getElementById('puntuacion');
 export const elementoMensaje = document.getElementById('mensaje');
@@ -13,6 +13,14 @@ botonDarCarta?.addEventListener('click', () => {
     actualizaPuntuacion();
     muestraCarta();
     muestraPuntuacion();
+});
+
+// Botón 'Plantarse'
+export const botonPlantarse = document.getElementById('mePlanto');
+
+botonPlantarse?.addEventListener('click', () => {
+    compruebaPuntuacion();
+    quePasaria();
 });
 
 // Botón 'Volver a jugar'
@@ -39,61 +47,6 @@ botonQuePasaria?.addEventListener('click', () => {
     };
 });
 
-
-// Botón 'Plantarse'
-const botonPlantarse = document.getElementById('mePlanto');
-botonPlantarse?.addEventListener('click', () => {
-    plantarse();
-    quePasaria();
-});
-
-// Mostrar Puntuacion
-export const muestraPuntuacion = () => {
-    if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
-        elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-    };
-
-    if (elementoMensaje && elementoMensaje instanceof HTMLElement) {
-        elementoMensaje.innerHTML = '';
-    };
-
-    if (partida.puntuacionUsuario >= 7.5) {
-        gameOver(partida.puntuacionUsuario);
-    };
-}
-
-// Game Over
-export const gameOver = (puntuacionUsuario: number) => {
-
-    if (elementoPuntuacion && elementoPuntuacion instanceof HTMLElement) {
-        elementoPuntuacion.innerHTML = `Tu puntuación es ${puntuacionUsuario}`;
-    };
-
-    if (elementoMensaje && elementoMensaje instanceof HTMLElement) {
-
-        elementoMensaje.innerHTML = 'Game over';
-
-        if (partida.puntuacionUsuario === 7.5) {
-            elementoMensaje.innerHTML = `¡Lo has clavado! ¡Enhorabuena!`;
-        }
-    };
-
-    if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
-
-        if (partida.puntuacionUsuario === 7.5) {
-            botonDarCarta.disabled = true;
-        }
-    };
-
-    if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
-
-        if (partida.puntuacionUsuario === 7.5) {
-            botonPlantarse.disabled = true;
-        }
-    };
-}
-
-
 // Mostrar Carta
 export const muestraCarta = () => {
 
@@ -101,72 +54,40 @@ export const muestraCarta = () => {
 
     if (elementoImagenCarta && elementoImagenCarta instanceof HTMLImageElement) {
         switch (partida.carta.valor) {
-            case partida.carta.valor = 1:
+            case 1:
                 elementoImagenCarta.src = '/src/images/1_as-copas.png';
                 break;
-            case partida.carta.valor = 2:
+            case 2:
                 elementoImagenCarta.src = '/src/images/2_dos-copas.png';
                 break;
-            case partida.carta.valor = 3:
+            case 3:
                 elementoImagenCarta.src = '/src/images/3_tres-copas.png';
                 break;
-            case partida.carta.valor = 4:
+            case 4:
                 elementoImagenCarta.src = '/src/images/4_cuatro-copas.png';
                 break;
-            case partida.carta.valor = 5:
+            case 5:
                 elementoImagenCarta.src = '/src/images/5_cinco-copas.png';
                 break;
-            case partida.carta.valor = 6:
+            case 6:
                 elementoImagenCarta.src = '/src/images/6_seis-copas.png';
                 break;
-            case partida.carta.valor = 7:
+            case 7:
                 elementoImagenCarta.src = '/src/images/7_siete-copas.png';
                 break;
-            case partida.carta.valor = 10:
+            case 10:
                 elementoImagenCarta.src = '/src/images/10_sota-copas.png';
                 break;
-            case partida.carta.valor = 11:
+            case 11:
                 elementoImagenCarta.src = '/src/images/11_caballo-copas.png';
                 break;
-            case partida.carta.valor = 12:
+            case 12:
                 elementoImagenCarta.src = '/src/images/12_rey-copas.png';
                 break;
         };
     }
 };
 
-
-// Me Planto
-export const plantarse = () => {
-
-    if (elementoPuntuacion &&
-        elementoPuntuacion instanceof HTMLElement) {
-
-        if (partida.puntuacionUsuario >= 0.5 && partida.puntuacionUsuario <= 4) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-        }
-        if (partida.puntuacionUsuario === 5) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-        }
-        if (partida.puntuacionUsuario >= 6 || partida.puntuacionUsuario === 7) {
-            elementoPuntuacion.innerHTML = `Tu puntuación es ${partida.puntuacionUsuario}`;
-        };
-    };
-
-    if (elementoMensaje &&
-        elementoMensaje instanceof HTMLElement) {
-
-        if (partida.puntuacionUsuario >= 0.5 && partida.puntuacionUsuario <= 4) {
-            elementoMensaje.innerHTML = `Has sido muy conservador`;
-        }
-        if (partida.puntuacionUsuario === 5) {
-            elementoMensaje.innerHTML = `Te ha entrado el canguelo eh?`;
-        }
-        if (partida.puntuacionUsuario >= 6 || partida.puntuacionUsuario === 7) {
-            elementoMensaje.innerHTML = `Casi casi...`;
-        };
-    };
-};
 
 // Nueva Partida
 const resetUI = () => {
