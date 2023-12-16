@@ -80,16 +80,12 @@ export const gameOver = (puntuacionUsuario: number) => {
 
     if (botonDarCarta && botonDarCarta instanceof HTMLButtonElement) {
 
-        botonDarCarta.disabled = true;
-
         if (partida.puntuacionUsuario === 7.5) {
             botonDarCarta.disabled = true;
         }
     };
 
     if (botonPlantarse && botonPlantarse instanceof HTMLButtonElement) {
-
-        botonPlantarse.disabled = true;
 
         if (partida.puntuacionUsuario === 7.5) {
             botonPlantarse.disabled = true;
@@ -171,14 +167,6 @@ export const plantarse = () => {
         };
     };
 };
-
-//Reset
-export const iniciarPartida = () => {
-    partida.puntuacionUsuario = 0;
-    elementoImagenCarta.src = '/src/images/back.png';
-    partida.cartasMostradas = [];
-}
-
 
 // Nueva Partida
 const resetUI = () => {

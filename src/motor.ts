@@ -1,5 +1,5 @@
 import { partida } from "./model";
-
+import { elementoImagenCarta } from "./ui";
 
 // Pedir carta
 export const dameCarta = () => {
@@ -29,4 +29,11 @@ export const actualizaPuntuacion = () => {
     };
 
     partida.puntuacionUsuario = partida.puntuacionUsuario + valorCarta;
+}
+
+//Reset
+export const iniciarPartida = () => {
+    partida.puntuacionUsuario = 0;
+    elementoImagenCarta.src = '/src/images/back.png';
+    partida.cartasMostradas = [];
 }
