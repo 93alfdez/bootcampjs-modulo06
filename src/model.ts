@@ -3,6 +3,7 @@ export interface Partida {
     carta: Carta,
     cartasMostradas: number[],
     mensaje: string,
+    estado: number,
 }
 
 export interface Carta {
@@ -10,9 +11,11 @@ export interface Carta {
     url: string,
 }
 
+
 export const partida: Partida = {
     puntuacionUsuario: 0,
     carta: { valor: 0, url: '/src/images/back.png' },
     cartasMostradas: [],
-    mensaje: ""
+    mensaje: "",
+    estado: 0
 }
